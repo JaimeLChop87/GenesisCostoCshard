@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Genesis.Utils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,28 +14,53 @@ namespace Core.Entities
     /// </summary>
     public class UnidadMedida
     {
-        public int Id { get; set; }
-        public string DescripcionUnidad { get; set; } = string.Empty;
-        public string AbreUnidad { get; set; } = string.Empty;
-        public string TipoMedida { get; set; } = string.Empty;
-        public string UnidadRef {  get; set; } = string.Empty;
-        public float UnidadConversion { get; set; } = float.MinValue;
-        public bool Esref {  get; set; } = false;
-
-        public bool Estado { get; set; }
-        public DateTime FechaCreacion { get; set; }
-
+        // campo uso para BBDD
+        public int Id { get; private set;}
         
+        // propiedades privadas
+        private string _descripcionUnidad = string.Empty;
+        private string _abreviatura = string.Empty;
+        private decimal _unidadConver = 0m;
+
+        // campos publicos
+        public TiposMedidas TipoMedida {get; set;}
+        
+        public bool EsReferencia {get; set;} = false;
+
+        public bool EstaActivo { get; set;}
+        public DateTime FechaCreacion {get; set;}
+
+        // metodos encapsulamiento valores
+        public string DescripcionUnidad 
+        { 
+            get => _descripcionUnidad; 
+            set => _descripcionUnidad = TextStandardizer.TextMayusClear(value); 
+        }
+
+        public string Abreviatura
+        {
+            get => _abreviatura;
+            set => _abreviatura = TextStandardizer.TextMayusClear(value);
+        }
+
+        public decimal UnidadConversion 
+        { 
+            get => _unidadConver; 
+            set => _unidadConver = DigitStandarizer.ValidarDecimalPos(value); 
+        }
+
+        public enum TiposMedidas { Longitud, Area, Volumen, Masa, Tiempo, Temperatura, Compuesta }
+
+        //constructor
         public UnidadMedida() { }
-        public UnidadMedida(string descripcion, string abreUnidad, string tipoMedida, string uniRef, float conver ) : this()
+        public UnidadMedida(string descripcion, string abreUnidad, TiposMedidas tipoMedida, decimal conver ) : this()
         {
             DescripcionUnidad = descripcion;
-            AbreUnidad = abreUnidad;
+            Abreviatura = abreUnidad;
             TipoMedida = tipoMedida;
-            UnidadRef = uniRef;
             UnidadConversion = conver;
-            Esref = false;
-            Estado = true;
+            EsReferencia = false;
+            EstaActivo = true;
             FechaCreacion = DateTime.Now;
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Genesis.Utils;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -9,25 +10,43 @@ namespace Core.Entities
 {
     public class ItemActividad
     {
-        public int Id { get; set; }
-        public string NombreItemActividad { get; set; } = string.Empty;
-        public string Unidad {  get; set; } = string.Empty;
-        public string DescripcionItemActividad { get; set; } = string.Empty;
+        // campos usados BBDD
+        public int Id { get; private set; }
+        // campos clases foraneos BBDD
+        public int UnidadMedidaId { get; set; }
 
-        public bool Estado { get; set; }
+        // campos privados
+        private string _nombreItemActividad = string.Empty;
+        private string _descripcionItemActividad = string.Empty;
+
+        public bool EstaActivo { get; set; }
         public DateTime FechaCreacion { get; set; }
+
+        //objetos clases foraneas
+        public UnidadMedida Unidad {  get; set; }
+
+        // metodos de validacion informacion
+        public string NombreItemActividad 
+        { 
+            get => _nombreItemActividad; 
+            set => _nombreItemActividad = TextStandardizer.TextMayusClear(value);
+        }
+
+        public string DescripcionItemActividad
+        {
+            get => _descripcionItemActividad;
+            set => _descripcionItemActividad = TextStandardizer.TextMayusClear(value);
+        }
 
         // Constructor 
         public ItemActividad() { }
-        public ItemActividad(string nombre, string unidad, string descripcion) : this()
+        public ItemActividad(string nombre, UnidadMedida unidad, string descripcion) : this()
         {
             NombreItemActividad = nombre;
             Unidad = unidad;
             DescripcionItemActividad = descripcion;
-            Estado = true;
+            EstaActivo = true;
             FechaCreacion = DateTime.Now;
         }
-
-
     }
 }

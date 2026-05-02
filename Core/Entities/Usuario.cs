@@ -25,12 +25,13 @@ namespace Core.Entities
         private string _email = string.Empty;
         private string _passWordHash = string.Empty;
 
+        // campos publicos
         public RolUsuario Rol { get; set; }
         public bool EstaActivo { get; set; }
         public DateTime UltimoIngreso { get; set; }
 
 
-        // metodos encapsulamiento entrada de texto
+        // metodos encapsulamiento entrada usuario
         public string Username 
         { 
             get => _username;

@@ -30,15 +30,13 @@ namespace Genesis.ConsoleUI.Forms
                     ForCabecera();
                     InfoFormUserNick();
                     Console.WriteLine($"\nNombre Usuario: {nombreUser}");
-                    Console.WriteLine("");
-                    Console.WriteLine("Nick_Name Usuario (Nombre a mostrar en app)");
-
+                    Console.WriteLine("\nNick_Name Usuario (Nombre a mostrar en app)");
                     break;
                 }
                 Console.Clear();
                 ForCabecera();
                 InfoFormUserName();
-                Console.WriteLine("Nombre Usuario");
+                Console.WriteLine("\nNombre Usuario");
                 nombreUser = Console.ReadLine();
             }
 
@@ -54,15 +52,14 @@ namespace Genesis.ConsoleUI.Forms
                     InfoFormEmail();
                     Console.WriteLine($"\nNombre Usuario: {nombreUser}");
                     Console.WriteLine($"\nNickName Usuario: {nickName}");
-                    Console.WriteLine("");
-                    Console.WriteLine("Email User: ");
+                    Console.WriteLine("\nEmail User: ");
                     break;
                 }
                 Console.Clear();
                 ForCabecera();
-                Console.WriteLine($"\nNombre Usuario: {nombreUser}");
                 InfoFormUserNick();
-                Console.WriteLine("Nick_Name Usuario (Nombre a mostrar en app)");
+                Console.WriteLine($"\nNombre Usuario: {nombreUser}");
+                Console.WriteLine("\nNick_Name Usuario (Nombre a mostrar en app)");
                 nickName = Console.ReadLine();
             }
 
@@ -75,20 +72,19 @@ namespace Genesis.ConsoleUI.Forms
                     emailUser = TextStandardizer.ValidarEmail(emailUser);
                     Console.Clear();
                     ForCabecera();
+                    InfoFormPassword();
                     Console.WriteLine($"\nNombre Usuario: {nombreUser}");
                     Console.WriteLine($"\nNickName Usuario: {nickName}");
-                    Console.WriteLine($"Email User: {emailUser}");
-                    Console.WriteLine("");
-                    Console.WriteLine("Conraseña: ");
+                    Console.WriteLine($"\nEmail User: {emailUser}");
+                    Console.WriteLine("\nConraseña: ");
                     break;
                 }
                 Console.Clear();
                 ForCabecera();
-                
+                InfoFormEmail();
                 Console.WriteLine($"\nNombre Usuario: {nombreUser}");
                 Console.WriteLine($"\nNickName Usuario: {nickName}");
-                InfoFormEmail();
-                Console.WriteLine("Email User:");
+                Console.WriteLine("\nEmail User:");
                 emailUser = Console.ReadLine();
             }
 
@@ -103,17 +99,16 @@ namespace Genesis.ConsoleUI.Forms
                     ForCabecera();
                     Console.WriteLine($"\nNombre Usuario: {nombreUser}");
                     Console.WriteLine($"\nNickName Usuario: {nickName}");
-                    Console.WriteLine($"Email User: {emailUser}");
+                    Console.WriteLine($"\nEmail User: {emailUser}");
                     break;
                 }
                 Console.Clear();
                 ForCabecera();
-
+                InfoFormPassword();
                 Console.WriteLine($"\nNombre Usuario: {nombreUser}");
                 Console.WriteLine($"\nNickName Usuario: {nickName}");
-                Console.WriteLine($"Email User: {emailUser}");
-
-                Console.WriteLine("Conraseña: ");
+                Console.WriteLine($"\nEmail User: {emailUser}");
+                Console.WriteLine("\nConraseña: ");
                 password = ConsoleHelper.LeerPasswordSeguroConsola();
             }
 

@@ -16,7 +16,10 @@ namespace Core.Entities
     /// </summary>
     public class RecursoUnitario
     {
-        public int Id { get; set; }
+        public int Id { get; private set; }
+
+
+
         public string NombreRecursoUnitario { get; set; } = string.Empty;
         public string Unidad { get; set; } = string.Empty;
         public string TipoRecurso { get; set; } = string.Empty;
