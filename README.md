@@ -4,7 +4,7 @@ Tecnologías: .NET 8, Entity Framework Core, SQLite, BCrypt.Net.
 
 Ciudad: Bello, Antioquia Colombia
 Estado del proyecto: En Desarrollo
-Fecha Actualizacion: 01 Mayo 2026
+Fecha Actualizacion: 02 Mayo 2026
 
 📑 Génesis Costos
 Génesis Costos es una solución para la gestión y análisis de costos, construida bajo estándares de arquitectura limpia (Clean Architecture) y con un enfoque riguroso en la seguridad de la información.
