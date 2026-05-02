@@ -11,86 +11,111 @@ namespace Genesis.ConsoleUI.Forms
 {
     public static class FormCrearCuenta
     {
-        
+
         public static void FormCrearCuentaUser()
         {
             Console.Clear();
+            
             ForCabecera();
-
+            InfoFormUserName();
             // 1. Nombre Usuario
             Console.WriteLine("Nombre Usuario");
             string nombreUser = Console.ReadLine();
-            while (string.IsNullOrEmpty(nombreUser))
+            while (true)
             {
-
-                if (string.IsNullOrEmpty(TextStandardizer.TextMayusClear(nombreUser)))
+                if (!string.IsNullOrEmpty(TextStandardizer.ValidarNameUser(nombreUser)))
                 {
+                    nombreUser = TextStandardizer.ValidarNameUser(nombreUser);
                     Console.Clear();
                     ForCabecera();
-                    Console.WriteLine("Nombre Usuario");
-                    nombreUser = Console.ReadLine();
-                    continue;
-                }
-                if (!string.IsNullOrEmpty(TextStandardizer.TextMayusClear(nombreUser)))
-                {
-                    Console.Clear();
-                    ForCabecera();
+                    InfoFormUserNick();
                     Console.WriteLine($"\nNombre Usuario: {nombreUser}");
+                    Console.WriteLine("");
+                    Console.WriteLine("Nick_Name Usuario (Nombre a mostrar en app)");
+
                     break;
                 }
+                Console.Clear();
+                ForCabecera();
+                InfoFormUserName();
+                Console.WriteLine("Nombre Usuario");
+                nombreUser = Console.ReadLine();
             }
 
-            // 2. NickName
-            Console.WriteLine("Nick_Name Usuario (Nombre a mostrar en app)");
+            // 2. Solicitud NickName User
             string nickName = Console.ReadLine();
-
-            while (string.IsNullOrEmpty(nickName))
+            while (true)
             {
-
-                if (string.IsNullOrEmpty(TextStandardizer.TextMayusClear(nickName)))
+                if (!string.IsNullOrEmpty(TextStandardizer.ValidarNickUser(nickName)))
                 {
+                    nickName = TextStandardizer.ValidarNickUser(nickName);
                     Console.Clear();
-                    FormUserLogin.ForCabecera();
-                    Console.WriteLine($"Nombre Usuario: {nombreUser}");
-                    Console.WriteLine("Nick_Name Usuario (Nombre a mostrar en app)");
-                    nickName = Console.ReadLine();
-                    continue;
-                }
-                if (!string.IsNullOrEmpty(TextStandardizer.TextMayusClear(nickName)))
-                {
+                    ForCabecera();
+                    InfoFormEmail();
                     Console.WriteLine($"\nNombre Usuario: {nombreUser}");
-                    Console.WriteLine($"Nick_Name Usuario: {nickName}");
+                    Console.WriteLine($"\nNickName Usuario: {nickName}");
+                    Console.WriteLine("");
+                    Console.WriteLine("Email User: ");
                     break;
                 }
+                Console.Clear();
+                ForCabecera();
+                Console.WriteLine($"\nNombre Usuario: {nombreUser}");
+                InfoFormUserNick();
+                Console.WriteLine("Nick_Name Usuario (Nombre a mostrar en app)");
+                nickName = Console.ReadLine();
             }
 
-
-            // 3. NickName
-            Console.WriteLine("Email");
+            // 3. email
             string emailUser = Console.ReadLine();
-
-            while (string.IsNullOrEmpty(emailUser))
+            while (true)
             {
-
-                if (string.IsNullOrEmpty(TextStandardizer.TextMayusClear(nickName)))
+                if (!string.IsNullOrEmpty(TextStandardizer.ValidarEmail(emailUser)))
                 {
+                    emailUser = TextStandardizer.ValidarEmail(emailUser);
                     Console.Clear();
-                    FormUserLogin.ForCabecera();
-                    Console.WriteLine($"Nombre Usuario: {nombreUser}");
-                    Console.WriteLine("Nick_Name Usuario (Nombre a mostrar en app)");
-                    nickName = Console.ReadLine();
-                    continue;
-                }
-                if (!string.IsNullOrEmpty(TextStandardizer.TextMayusClear(nickName)))
-                {
-                    Console.WriteLine($"Nombre Usuario: {nombreUser}");
-                    Console.WriteLine($"Nick_Name Usuario: {nickName}");
+                    ForCabecera();
+                    Console.WriteLine($"\nNombre Usuario: {nombreUser}");
+                    Console.WriteLine($"\nNickName Usuario: {nickName}");
+                    Console.WriteLine($"Email User: {emailUser}");
+                    Console.WriteLine("");
+                    Console.WriteLine("Conraseña: ");
                     break;
                 }
+                Console.Clear();
+                ForCabecera();
+                
+                Console.WriteLine($"\nNombre Usuario: {nombreUser}");
+                Console.WriteLine($"\nNickName Usuario: {nickName}");
+                InfoFormEmail();
+                Console.WriteLine("Email User:");
+                emailUser = Console.ReadLine();
             }
 
+            // 5. password App
+            string password = ConsoleHelper.LeerPasswordSeguroConsola();
+            while (true)
+            {
+                if (!string.IsNullOrEmpty(TextStandardizer.ValidarEmail(password)))
+                {
+                    password = TextStandardizer.ValidarEmail(password);
+                    Console.Clear();
+                    ForCabecera();
+                    Console.WriteLine($"\nNombre Usuario: {nombreUser}");
+                    Console.WriteLine($"\nNickName Usuario: {nickName}");
+                    Console.WriteLine($"Email User: {emailUser}");
+                    break;
+                }
+                Console.Clear();
+                ForCabecera();
 
-            Console.WriteLine("Conraseña: ");
+                Console.WriteLine($"\nNombre Usuario: {nombreUser}");
+                Console.WriteLine($"\nNickName Usuario: {nickName}");
+                Console.WriteLine($"Email User: {emailUser}");
+
+                Console.WriteLine("Conraseña: ");
+                password = ConsoleHelper.LeerPasswordSeguroConsola();
+            }
 
 
         }
@@ -106,13 +131,65 @@ namespace Genesis.ConsoleUI.Forms
             Console.WriteLine("Ingrese los campos requeridos");
             Console.WriteLine("");
 
+        }
 
+        public static void InfoFormUserName()
+        {
+            Console.WriteLine("----------************------------");
+            Console.WriteLine("");
+            Console.WriteLine("1. el nombre no puede estar limpio");
+            Console.WriteLine("2. el nombre puedo contener los caracteres (0-9 A-Z -  .  _ )");
+            Console.WriteLine("3. la cantidad de caracteres del nombre no debe ser menor a 5, no debe superar los 40 caracteres");
+            Console.WriteLine("4.1 el nombre debe contener como minimo 3 caractes de tipo Letra");
+            Console.WriteLine("4.2 el nombre debe de contener maximo 7 caracteres de tipo Num");
+            Console.WriteLine("");
+            Console.WriteLine("----------************------------");
+            Console.WriteLine("");
+        }
 
+        public static void InfoFormUserNick()
+        {
+            Console.WriteLine("----------************------------");
+            Console.WriteLine("");
+            Console.WriteLine("1. el NickName no puede estar limpio");
+            Console.WriteLine("2. el NickName puede contener los caracteres (0-9 A-Z -  .  _ )");
+            Console.WriteLine("3. la cantidad de caracteres del NickName  no debe ser menor a 7, no debe superar los 21 caracteres");
+            Console.WriteLine("4.1 el NickName debe contener como minimo 7 caractes de tipo Letra");
+            Console.WriteLine("4.2 el NickName debe de contener maximo 7 caracteres de tipo Num");
+            Console.WriteLine("");
+            Console.WriteLine("----------************------------");
+            Console.WriteLine("");
+        }
 
+        public static void InfoFormEmail()
+        {
+            Console.WriteLine("----------************------------");
+            Console.WriteLine("");
+            Console.WriteLine("1.0 el Email no puede estar limpio");
+            Console.WriteLine("2.0 el email, debde de tener un solo @");
+            Console.WriteLine("3.0 el email debe de estar compuesto por 'local@dominio.' ");
+            Console.WriteLine("4.1 el email.local no debe superar los 64 caracteres");
+            Console.WriteLine("4.2 el email no puede comenzar con punto o guion . o -");
+            Console.WriteLine("4.3 el email no puede contener dos puntos seguidos '..'");
+            Console.WriteLine("4.4 los caracteres permitidos Email.Local '!' '#' '$' '%' '&' '*' '+' '-' '/' '=' '?' '^' '_' '.' '{' '|' '}'");
+            Console.WriteLine("Correos permitidos terminados en .COM", ".NET", ".ORG", ".CO", ".EDU");
+            Console.WriteLine("----------************------------");
+            Console.WriteLine("");
+        }
 
-
-
-
+        public static void InfoFormPassword()
+        {
+            Console.WriteLine("----------************------------");
+            Console.WriteLine("");
+            Console.WriteLine("1.0 el password no puede estar limpio o contener espacios");
+            Console.WriteLine("2.0 el password debe de contener min un char MAYUSCULA");
+            Console.WriteLine("3.0 el password debe de contener min un char miníscula");
+            Console.WriteLine("4.0 el password debe de contener min un digito");
+            Console.WriteLine("5.0 el password debe de contener min un char especial");
+            Console.WriteLine("los caracteres permitidos '!' '#' '$' '%' '&' '*' '+' '-' '/' '=' '?' '^' '_' '.' '{' '|' '}'");
+            Console.WriteLine("6.0 el password debe ser mayor a 8 caracterres");
+            Console.WriteLine("----------************------------");
+            Console.WriteLine("");
         }
     }
 

@@ -14,7 +14,7 @@ namespace Core.Entities
     /// Contiene reglas y parametros en la creacion de Usuario
     /// En la creacion de cuentas de usuario
     /// </summary>
-    public class Usuarios
+    public class Usuario
     {
         // campo uso para BBDD
         public int Id { get; private set; }
@@ -59,13 +59,13 @@ namespace Core.Entities
         public enum RolUsuario { Xverificar, Administrador, Usuario, Estudiante }
 
         // constructor
-        public Usuarios() { }
-        public Usuarios(string user, string nombre,string email, string passHash)
+        public Usuario() { }
+        public Usuario(string user, string nombre,string email, string passHash)
         {
             Username = user;
             NombrePila = nombre;
             Email = email;
-            PasswordHash = PasswordHasher.HashPassword(PasswordHash);
+            PasswordHash = PasswordHasher.HashPassword(passHash);
             
             EstaActivo = true;
             Rol = RolUsuario.Xverificar;

@@ -21,7 +21,7 @@ namespace Genesis.Data
         public DbSet<TipoCosto> TiposCosto { get; set; }
         public DbSet<TipoRecurso> TiposRecurso { get; set; }
         public DbSet<UnidadMedida> UnidadesMedida { get; set; }
-        public DbSet<Usuarios> Users { get; set; }
+        public DbSet<Usuario> Users { get; set; }
 
       
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

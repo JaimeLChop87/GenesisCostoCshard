@@ -4,6 +4,7 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Genesis.Utils
 {
@@ -20,7 +21,6 @@ namespace Genesis.Utils
         /// devuelve "" si es null, convierte entrada MAYUS Limpia espacios vacios
         /// Entradas de texto
         /// </summary>
-        /// <param name="text"> string caracteres </param>
         public static string TextMayusClear (string text)
         {
             if (String.IsNullOrEmpty(text))
@@ -33,8 +33,6 @@ namespace Genesis.Utils
         /// Metodo validacion entrada Email
         /// si es null = "", 
         /// </summary>
-        /// <param name="email"></param>
-        /// <returns></returns>
         public static string ValidarEmail (string email)
         {
             // 1. Limpieza Validacion no null o empy
@@ -67,6 +65,84 @@ namespace Genesis.Utils
 
             return emailClear;
 
+        }
+
+        /// <summary>
+        /// Validador EntradaCracionUsuario UserName
+        /// Permite validar la informacion ingresada en generacion NameUser con respecto a las politicas EMPRESA
+        /// Se usa en validacion nameUser en la creacion de cuenta
+        /// </summary>
+        public static string ValidarNameUser(string userName)
+        {
+            string userNameVal = TextMayusClear(userName);
+            // 1. el nombre no puede estar limpio
+            if (String.IsNullOrEmpty(userNameVal))
+                return string.Empty;
+
+            // 2. el nombre solo puede tener "0-9", "A-Z", "-", ".", "_"
+            List<char> charOk = new List<char> { '-', '.', '_' };
+            foreach (char c in userNameVal)
+            {
+                if (!char.IsLetterOrDigit(c) && !charOk.Contains(c))
+                    return string.Empty;
+            }
+
+            // 3. se debe de cumpir longitud nombre mayorigual a 5 menorigual a 40 (5char <= Length(nombre) <=40char)
+            if (userNameVal.Length < 5 || userNameVal.Length >= 40)
+                return string.Empty;
+
+            int letterInName = 0;
+            int DigInName = 0;
+            // 4.1 el nombre debe contener como minimo 3 caractes tipo Letra
+            // 4.2 el nombre debe de contener maximo 7 caracteres tipo Num
+            foreach (char c in userNameVal)
+            {
+                if (char.IsLetter(c)) letterInName++;
+                if (char.IsDigit(c)) DigInName++;
+            }
+            if ((letterInName < 3 || DigInName>7))
+                return string.Empty;
+
+            return userNameVal;
+        }
+
+        /// <summary>
+        /// Validador EntradaCracionUsuario UserNickName
+        /// Permite validar la informacion ingresada en generacion NameUser con respecto a las politicas EMPRESA
+        /// Se usa en validacion nameUser en la creacion de cuenta
+        /// </summary>
+        public static string ValidarNickUser(string userNick)
+        {
+            string userNickVal = TextMayusClear(userNick);
+            // 1. el nombre no puede estar limpio
+            if (String.IsNullOrEmpty(userNickVal))
+                return string.Empty;
+
+            // 2. el nombre solo puede tener "0-9", "A-Z", "-", ".", "_"
+            List<char> charOk = new List<char> { '-', '.', '_' };
+            foreach (char c in userNickVal)
+            {
+                if (!char.IsLetterOrDigit(c) && !charOk.Contains(c))
+                    return string.Empty;
+            }
+
+            // 3. se debe de cumpir longitud nombre mayorigual a 7 menorigual a 21 (5char <= Length(nombre) <=40char)
+            if (userNickVal.Length < 7 || userNickVal.Length >= 21)
+                return string.Empty;
+
+            int letterInName = 0;
+            int DigInName = 0;
+            // 4.1 el nombre debe contener como minimo 5 caractes tipo Letra
+            // 4.2 el nombre debe de contener maximo 7 caracteres tipo Num
+            foreach (char c in userNickVal)
+            {
+                if (char.IsLetter(c)) letterInName++;
+                if (char.IsDigit(c)) DigInName++;
+            }
+            if ((letterInName < 5 || DigInName > 7))
+                return string.Empty;
+
+            return "@"+ userNickVal;
         }
 
         /// <summary>
@@ -116,7 +192,6 @@ namespace Genesis.Utils
             // 1. Dominio Máximo 240 caracteres en total
             if (Dominio.Length > 240)
                 return string.Empty;
-
 
             // 2.1 Dominio no puede comenzar con "."
             if (Dominio.StartsWith(".") || Dominio.EndsWith("."))
